@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Semiconductor Daily - Morning Edition</title>
+    <title>半导体早报</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #333;
             max-width: 900px;
@@ -20,14 +20,15 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         h1 {
-            color: #1976d2;
-            border-bottom: 3px solid #1976d2;
+            color: #1565c0;
+            border-bottom: 3px solid #1565c0;
             padding-bottom: 10px;
+            text-align: center;
         }
         h2 {
             color: #424242;
             margin-top: 30px;
-            border-left: 4px solid #1976d2;
+            border-left: 4px solid #1565c0;
             padding-left: 10px;
         }
         .header {
@@ -35,35 +36,75 @@
             padding: 15px;
             border-radius: 6px;
             margin-bottom: 20px;
+            text-align: center;
+        }
+        .tag {
+            display: inline-block;
+            background: #1565c0;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
+            font-size: 14px;
         }
         th, td {
             padding: 12px;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #ddd;
         }
         th {
-            background: #1976d2;
+            background: #1565c0;
             color: white;
         }
         tr:hover {
             background: #f5f5f5;
         }
         .positive {
-            color: #4caf50;
+            color: #2e7d32;
+            font-weight: bold;
         }
         .negative {
-            color: #f44336;
+            color: #c62828;
+            font-weight: bold;
         }
         .news-item {
             background: #fafafa;
             padding: 15px;
             margin: 10px 0;
-            border-left: 4px solid #1976d2;
+            border-left: 4px solid #1565c0;
+            border-radius: 0 4px 4px 0;
+        }
+        .news-title {
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 5px;
+        }
+        .news-source {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .news-summary {
+            font-size: 14px;
+            color: #333;
+        }
+        .focus-item {
+            background: #fff3e0;
+            padding: 12px;
+            margin: 8px 0;
+            border-left: 4px solid #e65100;
+            border-radius: 0 4px 4px 0;
+        }
+        .outlook-box {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
         }
         .footer {
             text-align: center;
@@ -73,83 +114,130 @@
             padding-top: 20px;
             border-top: 1px solid #ddd;
         }
-        .tag {
-            display: inline-block;
-            background: #1976d2;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
+        .stock-name {
+            font-weight: bold;
         }
-        pre {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 6px;
+        .stock-code {
+            font-size: 12px;
+            color: #666;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Semiconductor Daily - Morning Edition</h1>
-            <p>Date: {{DATE}} | Generated: {{TIMESTAMP}}</p>
-            <span class="tag">Pre-Market</span>
+            <h1>📊 半导体行业早报</h1>
+            <p>日期：{{DATE}} | 生成时间：{{TIMESTAMP}}</p>
+            <span class="tag">盘前数据</span>
         </div>
 
-        <h2>📈 Stock Overview</h2>
+        <h2>📈 股价概览</h2>
         <table>
             <tr>
-                <th>Ticker</th>
-                <th>Company</th>
-                <th>Price</th>
-                <th>Change</th>
-                <th>Change%</th>
-                <th>Volume</th>
+                <th>代码</th>
+                <th>公司</th>
+                <th>价格(USD)</th>
+                <th>涨跌</th>
+                <th>涨跌幅</th>
+                <th>成交量</th>
             </tr>
             <tr>
-                <td>INTC</td>
-                <td>Intel</td>
+                <td><span class="stock-code">INTC</span></td>
+                <td><span class="stock-name">英特尔</span></td>
                 <td>{{INTC_PRICE}}</td>
                 <td class="{{INTC_CHANGE_CLASS}}">{{INTC_CHANGE}}</td>
                 <td class="{{INTC_CHANGE_CLASS}}">{{INTC_CHANGE_PCT}}</td>
                 <td>{{INTC_VOLUME}}</td>
             </tr>
             <tr>
-                <td>NVDA</td>
-                <td>NVIDIA</td>
+                <td><span class="stock-code">NVDA</span></td>
+                <td><span class="stock-name">英伟达</span></td>
                 <td>{{NVDA_PRICE}}</td>
                 <td class="{{NVDA_CHANGE_CLASS}}">{{NVDA_CHANGE}}</td>
                 <td class="{{NVDA_CHANGE_CLASS}}">{{NVDA_CHANGE_PCT}}</td>
                 <td>{{NVDA_VOLUME}}</td>
             </tr>
             <tr>
-                <td>AMD</td>
-                <td>AMD</td>
+                <td><span class="stock-code">AMD</span></td>
+                <td><span class="stock-name">超微</span></td>
                 <td>{{AMD_PRICE}}</td>
                 <td class="{{AMD_CHANGE_CLASS}}">{{AMD_CHANGE}}</td>
                 <td class="{{AMD_CHANGE_CLASS}}">{{AMD_CHANGE_PCT}}</td>
                 <td>{{AMD_VOLUME}}</td>
             </tr>
+            <tr>
+                <td><span class="stock-code">TSM</span></td>
+                <td><span class="stock-name">台积电</span></td>
+                <td>{{TSM_PRICE}}</td>
+                <td class="{{TSM_CHANGE_CLASS}}">{{TSM_CHANGE}}</td>
+                <td class="{{TSM_CHANGE_CLASS}}">{{TSM_CHANGE_PCT}}</td>
+                <td>{{TSM_VOLUME}}</td>
+            </tr>
+            <tr>
+                <td><span class="stock-code">QCOM</span></td>
+                <td><span class="stock-name">高通</span></td>
+                <td>{{QCOM_PRICE}}</td>
+                <td class="{{QCOM_CHANGE_CLASS}}">{{QCOM_CHANGE}}</td>
+                <td class="{{QCOM_CHANGE_CLASS}}">{{QCOM_CHANGE_PCT}}</td>
+                <td>{{QCOM_VOLUME}}</td>
+            </tr>
+            <tr>
+                <td><span class="stock-code">MU</span></td>
+                <td><span class="stock-name">美光</span></td>
+                <td>{{MU_PRICE}}</td>
+                <td class="{{MU_CHANGE_CLASS}}">{{MU_CHANGE}}</td>
+                <td class="{{MU_CHANGE_CLASS}}">{{MU_CHANGE_PCT}}</td>
+                <td>{{MU_VOLUME}}</td>
+            </tr>
+            <tr>
+                <td><span class="stock-code">ASML</span></td>
+                <td><span class="stock-name">ASML</span></td>
+                <td>{{ASML_PRICE}}</td>
+                <td class="{{ASML_CHANGE_CLASS}}">{{ASML_CHANGE}}</td>
+                <td class="{{ASML_CHANGE_CLASS}}">{{ASML_CHANGE_PCT}}</td>
+                <td>{{ASML_VOLUME}}</td>
+            </tr>
+            <tr>
+                <td><span class="stock-code">AVGO</span></td>
+                <td><span class="stock-name">博通</span></td>
+                <td>{{AVGO_PRICE}}</td>
+                <td class="{{AVGO_CHANGE_CLASS}}">{{AVGO_CHANGE}}</td>
+                <td class="{{AVGO_CHANGE_CLASS}}">{{AVGO_CHANGE_PCT}}</td>
+                <td>{{AVGO_VOLUME}}</td>
+            </tr>
         </table>
 
-        <h2>📰 Overnight News</h2>
-        <pre>{{NEWS_CONTENT}}</pre>
+        <h2>📰 隔夜动态</h2>
+        {{NEWS_CONTENT}}
 
-        <h2>💡 Today's Focus</h2>
-        <ul>
-            <li>Intel 18A process development</li>
-            <li>NVIDIA data center revenue trends</li>
-            <li>AMD MI350 market adoption</li>
-            <li>Fed interest rate decision impact</li>
-        </ul>
+        <h2>💡 今日关注</h2>
+        <div class="focus-item">
+            <strong>🔹 英特尔 18A 制程进展</strong><br>
+            关注良率提升及大客户订单动态
+        </div>
+        <div class="focus-item">
+            <strong>🔹 英伟达数据中心收入</strong><br>
+            AI 芯片需求持续性及竞争格局变化
+        </div>
+        <div class="focus-item">
+            <strong>🔹 AMD MI350 市场采用</strong><br>
+            云服务商部署进展及市场份额争夺
+        </div>
+        <div class="focus-item">
+            <strong>🔹 美联储利率决议</strong><br>
+            宏观环境对科技股的影响
+        </div>
 
-        <h2>🔮 Market Outlook</h2>
-        <p>Semiconductor sector showing mixed signals. AI chip demand remains strong while traditional PC/Server markets face headwinds. Monitor earnings reports and guidance updates.</p>
+        <h2>🔮 开盘展望</h2>
+        <div class="outlook-box">
+            <p><strong>技术面：</strong>{{TECHNICAL_OUTLOOK}}</p>
+            <p><strong>资金面：</strong>{{FUND_FLOW_OUTLOOK}}</p>
+            <p><strong>综合判断：</strong>{{OVERALL_OUTLOOK}}</p>
+        </div>
 
         <div class="footer">
-            <p>Generated by Assistant | {{TIMESTAMP}}</p>
+            <p>数据来源：Finnhub / Kimi Search | 生成时间：{{TIMESTAMP}}</p>
+            <p>本报告仅供参考，不构成投资建议</p>
         </div>
     </div>
 </body>

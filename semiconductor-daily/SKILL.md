@@ -1,139 +1,177 @@
 ---
 name: semiconductor-daily
-description: Generate semiconductor industry daily reports (morning and evening editions) with stock price monitoring, news aggregation, and email delivery. Use when user needs to create or send semiconductor industry daily briefings, including stock data, company news, market analysis, and trend forecasts.
+description: 生成半导体行业中文早晚报，包含 Finnhub 实时股价、Kimi 搜索最新新闻、Reddit 社区监控，支持 PDF 生成和邮件发送。
 ---
 
-# Semiconductor Daily Report Skill
+# 半导体行业早晚报 (Semiconductor Daily Report)
 
-Generate professional semiconductor industry daily reports with morning and evening editions.
+生成专业的半导体行业中文早晚报，整合多源数据。
 
-## Overview
+## 概述
 
-This skill creates comprehensive semiconductor industry reports including:
-- Real-time stock price monitoring (INTC, NVDA, AMD, TSM, etc.)
-- Industry news aggregation
-- Market analysis and trend forecasts
-- Professional PDF report generation
-- Automated email delivery
+本技能创建全面的半导体行业报告，包括：
+- **实时股价数据** — 使用 Finnhub API 获取准确股价
+- **最新行业新闻** — 使用 kimi_search 搜索最近3日内新闻
+- **Reddit 社区监控** — 关注 r/wallstreetbets, r/stocks, r/semiconductors 等板块的讨论
+- **专业 PDF 报告生成**
+- **自动邮件发送**
 
-## Editions
+## 版本
 
-### Morning Edition (7:30 AM)
-- Pre-market stock data
-- Overnight news summary
-- Market opening outlook
-- Key events to watch
+### 早报 (07:30)
+- 盘前股价数据
+- 隔夜美股/亚洲市场动态
+- 今日重点关注
+- 开盘展望
 
-### Evening Edition (6:00 PM)
-- Market close data
-- Daily performance summary
-- After-hours news
-- Tomorrow's outlook
+### 晚报 (18:00)
+- 收盘股价数据
+- 当日新闻汇总
+- Reddit 热门讨论
+- 明日展望
 
-## Workflow
+## 工作流程
 
-### 1. Fetch Stock Data
+### 1. 获取股价数据 (Finnhub)
 
-Run Finnhub monitor script:
+**必须使用 Finnhub API 获取准确股价数据**
 
+运行股价监控脚本：
 ```bash
 cd /root/.openclaw/workspace && python3 -u scripts/finnhub_unified_monitor.py
 ```
 
-Key tickers: INTC, NVDA, AMD, TSM, QCOM, AVGO
+监控股票列表：
+| 代码 | 公司 | 说明 |
+|------|------|------|
+| INTC | 英特尔 | CPU/代工 |
+| NVDA | 英伟达 | GPU/AI芯片 |
+| AMD | 超微 | CPU/GPU |
+| TSM | 台积电 | 晶圆代工 |
+| QCOM | 高通 | 移动芯片 |
+| AVGO | 博通 | 网络芯片 |
+| MU | 美光 | 存储芯片 |
+| ASML | ASML | 光刻机 |
+| ARM | ARM | 芯片架构 |
+| AMAT | 应用材料 | 设备 |
 
-### 2. Fetch Industry News
+### 2. 搜索行业新闻 (kimi_search)
 
-Use news fetcher for semiconductor news:
+**必须使用 kimi_search 搜索最近3日内新闻**
 
-```bash
-python3 scripts/news_fetcher.py semiconductor
+搜索查询（执行多个）：
+```
+kimi_search:
+{
+  "query": "Intel NVIDIA AMD TSMC semiconductor stock news last 3 days",
+  "freshness": "pd3"
+}
 ```
 
-Keywords: Intel, NVIDIA, AMD, TSMC, chip, semiconductor, AI chip
+```
+kimi_search:
+{
+  "query": "英特尔 英伟达 AMD 台积电 半导体 芯片 最新消息",
+  "freshness": "pd3"
+}
+```
 
-### 3. Generate Report
+```
+kimi_search:
+{
+  "query": "AI chip GPU data center earnings news today",
+  "freshness": "pd3"
+}
+```
 
-Create HTML with:
-- Stock price table
-- Company news section
-- Industry analysis
-- Market outlook
+关键词：Intel, NVIDIA, AMD, TSMC, semiconductor, chip, AI chip, GPU, data center, earnings
 
-### 4. Convert to PDF
+### 3. 监控 Reddit (reddit-scraper skill)
+
+**使用 reddit-scraper skill 搜索最近3日内帖子**
+
+关注板块：
+- r/wallstreetbets
+- r/stocks
+- r/semiconductors
+- r/investing
+- r/technology
+
+搜索关键词：INTC, NVDA, AMD, TSMC, semiconductor, chip, Intel, NVIDIA
+
+### 4. 生成报告
+
+整合数据生成中文报告：
+- 股价表格（中文公司名）
+- 新闻摘要（中文）
+- Reddit 热门讨论（中文翻译/摘要）
+- 分析与展望（中文）
+
+### 5. 转换为 PDF
 
 ```bash
 node /root/.openclaw/workspace/scripts/html_to_pdf.js <input.html> <output.pdf>
 ```
 
-### 5. Send Email
+### 6. 发送邮件
 
 ```bash
 /root/.openclaw/workspace/skills/custom-smtp-sender/custom-smtp-sender send \
     --to <recipient> \
-    --subject "Semiconductor Daily | <edition> | <date>" \
-    --body "Report attached" \
+    --subject "半导体早晚报 | <早报/晚报> | <日期>" \
+    --body "报告PDF已生成，请查看附件。" \
     --attachments <pdf_file>
 ```
 
-## Report Structure
+## 报告结构
 
-### Morning Edition
+### 早报
 
-1. **Header**: Title, date, edition type
-2. **Stock Overview**: Price table with overnight changes
-3. **Overnight News**: Key developments from US/Asia markets
-4. **Today's Focus**: Events to watch
-5. **Market Outlook**: Opening expectations
+1. **标题区**：半导体早报 | 日期 | 盘前
+2. **股价概览**：中英文对照表格，含涨跌幅、成交量
+3. **隔夜动态**：美股/亚洲市场重要新闻（中文摘要）
+4. **今日关注**：重要事件提醒
+5. **开盘展望**：技术面/资金面简评
 
-### Evening Edition
+### 晚报
 
-1. **Header**: Title, date, edition type
-2. **Market Summary**: Daily performance table
-3. **Company News**: Major developments
-4. **Industry Analysis**: Trends and insights
-5. **Tomorrow's Outlook**: Next day preview
+1. **标题区**：半导体晚报 | 日期 | 收盘
+2. **收盘数据**：当日涨跌排行
+3. **新闻汇总**：当日重要新闻（分类：Intel/NVIDIA/AMD/行业）
+4. **Reddit热议**：社区热门讨论摘要
+5. **明日展望**：次日关注要点
 
-## Content Guidelines
+## 样式指南
 
-### Stock Data Table
+- **主标题**：深蓝色 (#1565c0)
+- **章节标题**：左侧边框 + 蓝色
+- **上涨**：绿色 (#2e7d32)
+- **下跌**：红色 (#c62828)
+- **新闻区块**：浅灰背景 + 左侧边框
+- **Reddit区块**：橙色 (#e65100) 标识
+- **字体**：中文字体优先（Noto Sans SC, PingFang SC, Microsoft YaHei）
 
-| Ticker | Company | Price | Change | Change% | Volume | RSI |
-|--------|---------|-------|--------|---------|--------|-----|
-| INTC | Intel | $xx.xx | ±$x.xx | ±x.xx% | xxM | xx |
+## 资源文件
 
-### News Sections
+- `assets/morning_template.html` — 早报模板（中文）
+- `assets/evening_template.html` — 晚报模板（中文）
 
-- **Intel**: Process technology, foundry business, AI PC
-- **NVIDIA**: GPU architecture, data center, AI dominance
-- **AMD**: CPU market share, AI accelerators, competition
-- **Industry**: Policy, supply chain, technology trends
+## 使用示例
 
-## Styling
+**用户**: "生成今天的半导体早报并发送到 sarowlwp@gmail.com"
 
-- Blue theme (#1976d2) for headers
-- Green for positive changes
-- Red for negative changes
-- Clean tables with borders
-- Professional sans-serif fonts
+**执行步骤**:
+1. 运行 finnhub_unified_monitor.py 获取实时股价
+2. 使用 kimi_search 搜索 "Intel NVIDIA AMD semiconductor news last 3 days"
+3. 使用 reddit-scraper 搜索相关板块讨论
+4. 整合数据，填充中文模板
+5. 转换为 PDF
+6. 发送邮件（主题："半导体早报 | MM-DD"）
 
-## Assets
+## 注意事项
 
-- `assets/morning_template.html` - Morning report template
-- `assets/evening_template.html` - Evening report template
-
-## Scripts
-
-- `scripts/news_fetcher.py` - Industry news aggregator
-- `scripts/generate_morning.py` - Morning report generator
-- `scripts/generate_evening.py` - Evening report generator
-
-## Example Usage
-
-"Generate semiconductor morning report and send to sarowlwp@gmail.com"
-
-1. Run finnhub_unified_monitor.py
-2. Fetch semiconductor news
-3. Generate morning edition HTML
-4. Convert to PDF
-5. Send email
+- **股价数据必须使用 Finnhub**，确保准确性
+- **新闻必须使用 kimi_search**，搜索最近3日内内容
+- **Reddit 数据使用 reddit-scraper skill**
+- **所有输出内容为中文**
+- 邮件主题使用中文："半导体早报/晚报 | MM-DD"
