@@ -1,6 +1,33 @@
 ---
 name: semiconductor-daily
 description: 生成半导体行业中文早晚报，包含 Finnhub 实时股价、Kimi 搜索最新新闻、Reddit 社区监控，支持 PDF 生成和邮件发送。
+tools:
+  - type: function
+    function:
+      name: kimi_search
+      description: 搜索最近 3 小时的实时新闻。
+      parameters:
+        type: object
+        properties:
+          query:
+            type: string
+            description: 搜索词
+          count:
+            type: integer
+            description: 结果数量
+        required: ["query"]
+
+  - type: function
+    function:
+      name: run_shell_command
+      description: 执行系统命令，如 node 脚本或 smtp 发送程序。
+      parameters:
+        type: object
+        properties:
+          command:
+            type: string
+            description: 完整的 shell 命令
+        required: ["command"]
 ---
 
 # 半导体行业早晚报 (Semiconductor Daily Report)
