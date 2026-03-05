@@ -113,18 +113,36 @@ kimi_search:
 
 关键词：Intel, NVIDIA, AMD, TSMC, semiconductor, chip, AI chip, GPU, data center, earnings
 
-### 3. 监控 Reddit (reddit-scraper skill)
+### 3. 监控 Reddit (kimi_search)
 
-**使用 reddit-scraper skill 搜索最近3日内帖子**
+**使用 kimi_search 搜索 Reddit 最近3日内热门讨论**
 
-关注板块：
-- r/wallstreetbets
-- r/stocks
-- r/semiconductors
-- r/investing
-- r/technology
+搜索查询：
+```
+kimi_search:
+{
+  "query": "site:reddit.com/r/wallstreetbets Intel NVIDIA AMD semiconductor stock last 3 days",
+  "freshness": "pd3"
+}
+```
 
-搜索关键词：INTC, NVDA, AMD, TSMC, semiconductor, chip, Intel, NVIDIA
+```
+kimi_search:
+{
+  "query": "site:reddit.com/r/stocks INTC NVDA AMD TSM investment discussion last 3 days",
+  "freshness": "pd3"
+}
+```
+
+```
+kimi_search:
+{
+  "query": "site:reddit.com/r/semiconductors chip industry news discussion last 3 days",
+  "freshness": "pd3"
+}
+```
+
+关注板块：r/wallstreetbets, r/stocks, r/semiconductors, r/investing, r/technology
 
 ### 4. 生成报告
 
@@ -190,7 +208,7 @@ node /root/.openclaw/workspace/scripts/html_to_pdf.js <input.html> <output.pdf>
 **执行步骤**:
 1. 运行 finnhub_unified_monitor.py 获取实时股价
 2. 使用 kimi_search 搜索 "Intel NVIDIA AMD semiconductor news last 3 days"
-3. 使用 reddit-scraper 搜索相关板块讨论
+3. 使用 kimi_search 搜索 Reddit 热门讨论
 4. 整合数据，填充中文模板
 5. 转换为 PDF
 6. 发送邮件（主题："半导体早报 | MM-DD"）
@@ -198,7 +216,6 @@ node /root/.openclaw/workspace/scripts/html_to_pdf.js <input.html> <output.pdf>
 ## 注意事项
 
 - **股价数据必须使用 Finnhub**，确保准确性
-- **新闻必须使用 kimi_search**，搜索最近3日内内容
-- **Reddit 数据使用 reddit-scraper skill**
+- **新闻和 Reddit 必须使用 kimi_search**，搜索最近3日内内容
 - **所有输出内容为中文**
 - 邮件主题使用中文："半导体早报/晚报 | MM-DD"
