@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>伊朗-美国局势简报</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            border-bottom: 3px solid #d32f2f;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h2 {
+            color: #1976d2;
+            margin-top: 30px;
+            border-left: 4px solid #1976d2;
+            padding-left: 12px;
+            font-size: 20px;
+        }
+        h3 {
+            color: #424242;
+            margin-top: 20px;
+            font-size: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        .header-info {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+        .tag {
+            display: inline-block;
+            background: #d32f2f;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+        .summary-box {
+            background: #fff3e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+        .news-item {
+            background: #fafafa;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 6px;
+            border-left: 3px solid #4caf50;
+        }
+        .news-title {
+            font-weight: bold;
+            color: #d32f2f;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        .news-meta {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .news-meta span {
+            margin-right: 15px;
+        }
+        .news-link {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .news-link:hover {
+            text-decoration: underline;
+        }
+        .news-summary {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .statement-box {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 3px solid #4caf50;
+        }
+        .statement-party {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 5px;
+        }
+        .impact-section {
+            margin-top: 15px;
+        }
+        .impact-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .impact-title {
+            font-weight: bold;
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .price-table th, .price-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .price-table th {
+            background: #1976d2;
+            color: white;
+        }
+        .price-up {
+            color: #4caf50;
+        }
+        .price-down {
+            color: #f44336;
+        }
+        .warning {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #c62828;
+        }
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔴 伊朗-美国局势简报</h1>
+        
+        <div class="header-info">
+            <span class="tag">实时更新</span>
+            <span>生成时间：{{TIMESTAMP}} CST</span>
+            <span> | 数据时间范围：最近3小时</span>
+        </div>
+
+        <!-- 第一部分：动态总结 -->
+        <h2>📋 一、动态总结</h2>
+        <div class="summary-box">
+            <strong>局势概览：</strong><br>
+            {{SUMMARY}}
+        </div>
+
+        <!-- 第二部分：最新事件 -->
+        <h2>🚨 二、最新事件（最近3小时）</h2>
+        
+        <div class="news-item">
+            <div class="news-title">{{EVENT1_TITLE}}</div>
+            <div class="news-meta">
+                <span>⏰ {{EVENT1_TIME}}</span>
+                <span>📰 {{EVENT1_SOURCE}}</span>
+                <a href="{{EVENT1_LINK}}" class="news-link" target="_blank">查看原文 →</a>
+            </div>
+            <div class="news-summary">{{EVENT1_SUMMARY}}</div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-title">{{EVENT2_TITLE}}</div>
+            <div class="news-meta">
+                <span>⏰ {{EVENT2_TIME}}</span>
+                <span>📰 {{EVENT2_SOURCE}}</span>
+                <a href="{{EVENT2_LINK}}" class="news-link" target="_blank">查看原文 →</a>
+            </div>
+            <div class="news-summary">{{EVENT2_SUMMARY}}</div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-title">{{EVENT3_TITLE}}</div>
+            <div class="news-meta">
+                <span>⏰ {{EVENT3_TIME}}</span>
+                <span>📰 {{EVENT3_SOURCE}}</span>
+                <a href="{{EVENT3_LINK}}" class="news-link" target="_blank">查看原文 →</a>
+            </div>
+            <div class="news-summary">{{EVENT3_SUMMARY}}</div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-title">{{EVENT4_TITLE}}</div>
+            <div class="news-meta">
+                <span>⏰ {{EVENT4_TIME}}</span>
+                <span>📰 {{EVENT4_SOURCE}}</span>
+                <a href="{{EVENT4_LINK}}" class="news-link" target="_blank">查看原文 →</a>
+            </div>
+            <div class="news-summary">{{EVENT4_SUMMARY}}</div>
+        </div>
+
+        <div class="news-item">
+            <div class="news-title">{{EVENT5_TITLE}}</div>
+            <div class="news-meta">
+                <span>⏰ {{EVENT5_TIME}}</span>
+                <span>📰 {{EVENT5_SOURCE}}</span>
+                <a href="{{EVENT5_LINK}}" class="news-link" target="_blank">查看原文 →</a>
+            </div>
+            <div class="news-summary">{{EVENT5_SUMMARY}}</div>
+        </div>
+
+        <!-- 第三部分：各方表态 -->
+        <h2>🗣️ 三、各方表态</h2>
+
+        <h3>🇮🇷 伊朗方面</h3>
+        <div class="statement-box">
+            <div class="statement-party">{{IRAN_STATEMENT_PARTY}}</div>
+            <div>{{IRAN_STATEMENT_CONTENT}}</div>
+        </div>
+
+        <h3>🇺🇸 美国方面</h3>
+        <div class="statement-box">
+            <div class="statement-party">{{US_STATEMENT_PARTY}}</span>
+            <div>{{US_STATEMENT_CONTENT}}</div>
+        </div>
+
+        <h3>🇮🇱 以色列方面</h3>
+        <div class="statement-box">
+            <div class="statement-party">{{ISRAEL_STATEMENT_PARTY}}</div>
+            <div>{{ISRAEL_STATEMENT_CONTENT}}</div>
+        </div>
+
+        <h3>🌍 国际社会</h3>
+        <div class="statement-box">
+            <div class="statement-party">{{INTL_STATEMENT_PARTY}}</div>
+            <div>{{INTL_STATEMENT_CONTENT}}</div>
+        </div>
+
+        <!-- 第四部分：金融及价格影响 -->
+        <h2>💹 四、金融及价格影响</h2>
+
+        <div class="impact-section">
+            <h3>📊 大宗商品价格</h3>
+            <table class="price-table">
+                <tr>
+                    <th>品种</th>
+                    <th>当前价格</th>
+                    <th>涨跌</th>
+                    <th>涨跌幅</th>
+                    <th>影响分析</th>
+                </tr>
+                <tr>
+                    <td>布伦特原油</td>
+                    <td>{{OIL_PRICE}}</td>
+                    <td class="{{OIL_CHANGE_CLASS}}">{{OIL_CHANGE}}</td>
+                    <td class="{{OIL_CHANGE_CLASS}}">{{OIL_CHANGE_PCT}}</td>
+                    <td>{{OIL_IMPACT}}</td>
+                </tr>
+                <tr>
+                    <td>黄金</td>
+                    <td>{{GOLD_PRICE}}</td>
+                    <td class="{{GOLD_CHANGE_CLASS}}">{{GOLD_CHANGE}}</td>
+                    <td class="{{GOLD_CHANGE_CLASS}}">{{GOLD_CHANGE_PCT}}</td>
+                    <td>{{GOLD_IMPACT}}</td>
+                </tr>
+                <tr>
+                    <td>天然气</td>
+                    <td>{{GAS_PRICE}}</td>
+                    <td class="{{GAS_CHANGE_CLASS}}">{{GAS_CHANGE}}</td>
+                    <td class="{{GAS_CHANGE_CLASS}}">{{GAS_CHANGE_PCT}}</td>
+                    <td>{{GAS_IMPACT}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="impact-section">
+            <h3>📈 股市影响</h3>
+            <div class="impact-box">
+                <div class="impact-title">美股市场</div>
+                <div>{{US_MARKET_IMPACT}}</div>
+            </div>
+            <div class="impact-box">
+                <div class="impact-title">欧洲市场</div>
+                <div>{{EU_MARKET_IMPACT}}</div>
+            </div>
+            <div class="impact-box">
+                <div class="impact-title">亚太市场</div>
+                <div>{{ASIA_MARKET_IMPACT}}</div>
+            </div>
+        </div>
+
+        <div class="impact-section">
+            <h3>🚢 航运与物流</h3>
+            <div class="impact-box">
+                <div class="impact-title">霍尔木兹海峡</div>
+                <div>{{HORMUZ_IMPACT}}</div>
+            </div>
+            <div class="impact-box">
+                <div class="impact-title">航运成本</div>
+                <div>{{SHIPPING_COST_IMPACT}}</div>
+            </div>
+        </div>
+
+        <!-- 风险预警 -->
+        <div class="warning">
+            <strong>⚠️ 风险提示</strong><br>
+            • 冲突可能持续升级，建议密切关注局势发展<br>
+            • 能源和金融市场波动性增加，注意投资风险<br>
+            • 本简报仅供参考，请以官方信息为准
+        </div>
+
+        <div class="footer">
+            <p>生成时间：{{TIMESTAMP}} CST | 数据时间范围：最近3小时</p>
+            <p>信息来源：新华社、央广网、财新网、路透社、彭博社等国际媒体</p>
+            <p>本简报由个人助理系统自动生成，仅供参考</p>
+        </div>
+    </div>
+</body>
+</html>
