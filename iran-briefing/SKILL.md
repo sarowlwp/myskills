@@ -124,13 +124,13 @@ kimi_search:
 ### 4. 转换为 PDF
 
 ```bash
-node /root/.openclaw/workspace/scripts/html_to_pdf.js /tmp/iran_briefing.html /tmp/iran_briefing.pdf
+node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js /tmp/iran_briefing.html /tmp/iran_briefing.pdf
 ```
 
 ### 5. 发送邮件（中文）
 
 ```bash
-/root/.openclaw/workspace/skills/custom-smtp-sender/custom-smtp-sender send \
+python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py \
     --to <recipient> \
     --subject "伊朗简报 | <日期> <时间>" \
     --body "简报PDF已生成，请查看附件。" \
@@ -184,8 +184,8 @@ node /root/.openclaw/workspace/scripts/html_to_pdf.js /tmp/iran_briefing.html /t
 1. 使用 kimi_search 搜索 "Iran US Israel conflict latest news last 3 hours"
 2. 整合搜索结果，按四部分结构组织
 3. 填充 template.html 中的变量
-4. 转换为 PDF
-5. 发送邮件（主题："伊朗简报 | MM-DD HH:MM"）
+4. 使用 `node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js` 转换为 PDF
+5. 使用 `python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py` 发送邮件（主题："伊朗简报 | MM-DD HH:MM"）
 
 ## 注意事项
 
