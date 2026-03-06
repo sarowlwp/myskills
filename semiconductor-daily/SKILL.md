@@ -54,6 +54,25 @@ tools:
 - Reddit 热门讨论
 - 明日展望
 
+## 重要提示
+
+**⚠️ 必须发送邮件**：生成报告后，**必须使用 exec 工具执行邮件发送脚本**，将PDF发送到指定邮箱（sarowlwp@gmail.com）。这是任务的强制要求，不可跳过。
+
+**发送命令模板**：
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py --to sarowlwp@gmail.com --subject '半导体早报 | MM-DD' --body '报告PDF已生成，请查看附件。' --attachments /tmp/semiconductor_morning.pdf"
+}
+```
+
+**发送成功后**：
+- 必须报告"邮件已成功发送到 sarowlwp@gmail.com"
+- 确认发送的主题和附件文件名
+- 如发送失败，必须重试并报告失败原因
+
+---
+
 ## 工作流程
 
 ### 1. 获取股价数据 (Finnhub)
