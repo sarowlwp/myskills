@@ -12,15 +12,12 @@ tools:
           query:
             type: string
             description: 搜索词
-          count:
-            type: integer
-            description: 结果数量
         required: ["query"]
 
   - type: function
     function:
-      name: run_shell_command
-      description: 执行系统命令，如 node 脚本或 smtp 发送程序。
+      name: exec
+      description: 执行系统命令，如运行Python脚本、Node脚本或发送邮件。
       parameters:
         type: object
         properties:
@@ -129,12 +126,13 @@ node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js /tmp/
 
 ### 5. 发送邮件（中文）
 
-```bash
-python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py \
-    --to <recipient> \
-    --subject "伊朗简报 | <日期> <时间>" \
-    --body "简报PDF已生成，请查看附件。" \
-    --attachments /tmp/iran_briefing.pdf
+**必须使用 exec 工具执行邮件发送脚本：**
+
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py --to sarowlwp@gmail.com --subject '伊朗简报 | MM-DD HH:MM' --body '简报PDF已生成，请查看附件。' --attachments /tmp/iran_briefing.pdf"
+}
 ```
 
 ## 报告结构（四个部分）

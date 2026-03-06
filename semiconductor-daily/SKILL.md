@@ -12,15 +12,12 @@ tools:
           query:
             type: string
             description: 搜索词
-          count:
-            type: integer
-            description: 结果数量
         required: ["query"]
 
   - type: function
     function:
-      name: run_shell_command
-      description: 执行系统命令，如 node 脚本或 smtp 发送程序。
+      name: exec
+      description: 执行系统命令，如运行Python脚本、Node脚本或发送邮件。
       parameters:
         type: object
         properties:
@@ -176,12 +173,13 @@ node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js
 
 ### 6. 发送邮件
 
-```bash
-python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py \
-    --to <recipient> \
-    --subject "半导体早晚报 | <早报/晚报> | <日期>" \
-    --body "报告PDF已生成，请查看附件。" \
-    --attachments <pdf_file>
+**必须使用 exec 工具执行邮件发送脚本：**
+
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py --to sarowlwp@gmail.com --subject '半导体早报 | MM-DD' --body '报告PDF已生成，请查看附件。' --attachments /tmp/semiconductor_morning.pdf"
+}
 ```
 
 ## 报告结构
