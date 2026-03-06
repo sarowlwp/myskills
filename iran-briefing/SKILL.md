@@ -41,23 +41,7 @@ tools:
 
 **所有输出内容为中文**
 
-## 快速使用（一体化脚本）
-
-使用 `generate_and_send.py` 一键生成并发送简报：
-
-```
-exec:
-{
-  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/generate_and_send.py"
-}
-```
-
-此脚本会自动：
-1. 生成HTML报告
-2. 转换为PDF
-3. 发送到 sarowlwp@gmail.com
-
-## 详细工作流程
+## 工作流程
 
 ### 1. 获取实时新闻（必须使用 kimi_search）
 
@@ -192,14 +176,68 @@ exec:
 
 ## 使用示例
 
-**用户**: "生成今天的伊朗简报并发送给 sarowlwp@gmail.com"
+### 示例：生成并发送伊朗简报
 
-**执行步骤**:
-1. 使用 kimi_search 搜索 "Iran US Israel conflict latest news last 3 hours"
-2. 整合搜索结果，按四部分结构组织
-3. 填充 template.html 中的变量
-4. 使用 `node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js` 转换为 PDF
-5. 使用 `python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py` 发送邮件（主题："伊朗简报 | MM-DD HH:MM"）
+**用户请求**: "生成今天的伊朗简报并发送到 sarowlwp@gmail.com"
+
+**完整执行流程**:
+
+#### 步骤1：搜索最新新闻
+使用 kimi_search 工具搜索最近3小时的新闻：
+```
+kimi_search:
+{
+  "query": "Iran US Israel conflict latest news last 3 hours 2026"
+}
+```
+
+```
+kimi_search:
+{
+  "query": "伊朗 美国 以色列 冲突 最新消息"
+}
+```
+
+```
+kimi_search:
+{
+  "query": "Gaza Hamas Hezbollah attack today"
+}
+```
+
+#### 步骤2：整合新闻内容
+将搜索结果整合为四个部分：
+- **动态总结**：一句话概括当前局势
+- **最新事件**：至少5条可信事件（含标题、时间、来源、链接、中文摘要）
+- **各方表态**：伊朗、美国、以色列、国际社会
+- **金融影响**：原油、黄金、股市、航运
+
+#### 步骤3：生成HTML报告
+填充 `assets/template.html` 模板中的变量，保存到 `/tmp/iran_briefing.html`
+
+#### 步骤4：转换为PDF
+使用 exec 工具执行转换脚本：
+```
+exec:
+{
+  "command": "node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js /tmp/iran_briefing.html /tmp/iran_briefing.pdf"
+}
+```
+
+#### 步骤5：发送邮件（必须执行）
+**重要：必须使用 exec 工具执行邮件发送脚本，将PDF发送到指定邮箱**
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py --to sarowlwp@gmail.com --subject '伊朗简报 | 03-06 12:00' --body '简报PDF已生成，请查看附件。' --attachments /tmp/iran_briefing.pdf"
+}
+```
+
+**发送完成后报告结果**：
+- 确认邮件已成功发送到 sarowlwp@gmail.com
+- 报告简报的主要内容和关键动态
+
+---
 
 ## 注意事项
 

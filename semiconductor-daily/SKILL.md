@@ -54,24 +54,7 @@ tools:
 - Reddit 热门讨论
 - 明日展望
 
-## 快速使用（一体化脚本）
-
-使用 `generate_and_send_morning.py` 一键生成并发送早报：
-
-```
-exec:
-{
-  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/generate_and_send_morning.py"
-}
-```
-
-此脚本会自动：
-1. 获取股价数据
-2. 生成HTML报告
-3. 转换为PDF
-4. 发送到 sarowlwp@gmail.com
-
-## 详细工作流程
+## 工作流程
 
 ### 1. 获取股价数据 (Finnhub)
 
@@ -234,15 +217,71 @@ exec:
 
 ## 使用示例
 
-**用户**: "生成今天的半导体早报并发送到 sarowlwp@gmail.com"
+### 示例：生成并发送半导体早报
 
-**执行步骤**:
-1. 运行 `/root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unified_monitor.py` 获取实时股价
-2. 使用 kimi_search 搜索 "Intel NVIDIA AMD semiconductor news last 3 days"
-3. 使用 kimi_search 搜索 Reddit 热门讨论
-4. 整合数据，填充中文模板
-5. 使用 `node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js` 转换为 PDF
-6. 使用 `python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py` 发送邮件（主题："半导体早报 | MM-DD"）
+**用户请求**: "生成今天的半导体早报并发送到 sarowlwp@gmail.com"
+
+**完整执行流程**:
+
+#### 步骤1：获取实时股价数据
+使用 exec 工具执行股价监控脚本：
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unified_monitor.py"
+}
+```
+
+#### 步骤2：搜索最新行业新闻
+使用 kimi_search 工具搜索多条查询：
+```
+kimi_search:
+{
+  "query": "Intel NVIDIA AMD TSMC semiconductor stock news last 3 days"
+}
+```
+
+```
+kimi_search:
+{
+  "query": "英特尔 英伟达 AMD 台积电 半导体 芯片 最新消息"
+}
+```
+
+#### 步骤3：搜索 Reddit 热门讨论
+```
+kimi_search:
+{
+  "query": "site:reddit.com/r/wallstreetbets Intel NVIDIA AMD semiconductor stock last 3 days"
+}
+```
+
+#### 步骤4：生成HTML报告
+整合上述数据，填充 `assets/morning_template.html` 模板，保存到 `/tmp/semiconductor_morning.html`
+
+#### 步骤5：转换为PDF
+使用 exec 工具执行转换脚本：
+```
+exec:
+{
+  "command": "node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js /tmp/semiconductor_morning.html /tmp/semiconductor_morning.pdf"
+}
+```
+
+#### 步骤6：发送邮件（必须执行）
+**重要：必须使用 exec 工具执行邮件发送脚本，将PDF发送到指定邮箱**
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py --to sarowlwp@gmail.com --subject '半导体早报 | 03-06' --body '报告PDF已生成，请查看附件。' --attachments /tmp/semiconductor_morning.pdf"
+}
+```
+
+**发送完成后报告结果**：
+- 确认邮件已成功发送到 sarowlwp@gmail.com
+- 报告生成的股票数据和主要新闻摘要
+
+---
 
 ## 注意事项
 
