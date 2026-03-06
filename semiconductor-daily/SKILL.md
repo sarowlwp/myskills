@@ -54,7 +54,24 @@ tools:
 - Reddit 热门讨论
 - 明日展望
 
-## 工作流程
+## 快速使用（一体化脚本）
+
+使用 `generate_and_send_morning.py` 一键生成并发送早报：
+
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/generate_and_send_morning.py"
+}
+```
+
+此脚本会自动：
+1. 获取股价数据
+2. 生成HTML报告
+3. 转换为PDF
+4. 发送到 sarowlwp@gmail.com
+
+## 详细工作流程
 
 ### 1. 获取股价数据 (Finnhub)
 

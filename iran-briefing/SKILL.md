@@ -41,7 +41,23 @@ tools:
 
 **所有输出内容为中文**
 
-## 工作流程
+## 快速使用（一体化脚本）
+
+使用 `generate_and_send.py` 一键生成并发送简报：
+
+```
+exec:
+{
+  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/generate_and_send.py"
+}
+```
+
+此脚本会自动：
+1. 生成HTML报告
+2. 转换为PDF
+3. 发送到 sarowlwp@gmail.com
+
+## 详细工作流程
 
 ### 1. 获取实时新闻（必须使用 kimi_search）
 
