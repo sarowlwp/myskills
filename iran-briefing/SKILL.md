@@ -1,35 +1,13 @@
 ---
 name: iran-briefing
 description: Generate Iran-US conflict briefing reports in Chinese with real-time news from kimi_search, PDF generation, and email delivery. Use when user needs to create or send Iran conflict situation reports in Chinese, including news aggregation from the last 3 hours, HTML/PDF formatting, and SMTP email sending.
-tools:
-  - type: function
-    function:
-      name: kimi_search
-      description: 搜索最近 3 小时的实时新闻。
-      parameters:
-        type: object
-        properties:
-          query:
-            type: string
-            description: 搜索词
-        required: ["query"]
-
-  - type: function
-    function:
-      name: exec
-      description: 执行系统命令，如运行Python脚本、Node脚本或发送邮件。
-      parameters:
-        type: object
-        properties:
-          command:
-            type: string
-            description: 完整的 shell 命令
-        required: ["command"]
 ---
 
 # Iran Briefing Skill (伊朗简报)
 
 生成专业的伊朗-美国冲突局势简报，使用中文输出，包含四个主要部分。
+
+**可用工具**：kimi_search（搜索新闻）、exec（执行命令/脚本）
 
 ## 概述
 
