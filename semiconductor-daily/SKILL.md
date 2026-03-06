@@ -63,9 +63,14 @@ tools:
 
 **必须使用 Finnhub API 获取准确股价数据**
 
-运行股价监控脚本：
+运行股价监控脚本（使用 skill 目录下的脚本，确保 cron 环境可访问）：
 ```bash
-cd /root/.openclaw/workspace && python3 -u scripts/finnhub_unified_monitor.py
+python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unified_monitor.py
+```
+
+或者直接执行（脚本会自动处理工作目录）：
+```bash
+exec: /root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unified_monitor.py
 ```
 
 监控股票列表：
@@ -166,13 +171,13 @@ kimi_search:
 ### 5. 转换为 PDF
 
 ```bash
-node /root/.openclaw/workspace/scripts/html_to_pdf.js <input.html> <output.pdf>
+node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js <input.html> <output.pdf>
 ```
 
 ### 6. 发送邮件
 
 ```bash
-/root/.openclaw/workspace/skills/custom-smtp-sender/custom-smtp-sender send \
+python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py \
     --to <recipient> \
     --subject "半导体早晚报 | <早报/晚报> | <日期>" \
     --body "报告PDF已生成，请查看附件。" \
@@ -217,12 +222,12 @@ node /root/.openclaw/workspace/scripts/html_to_pdf.js <input.html> <output.pdf>
 **用户**: "生成今天的半导体早报并发送到 sarowlwp@gmail.com"
 
 **执行步骤**:
-1. 运行 finnhub_unified_monitor.py 获取实时股价
+1. 运行 `/root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unified_monitor.py` 获取实时股价
 2. 使用 kimi_search 搜索 "Intel NVIDIA AMD semiconductor news last 3 days"
 3. 使用 kimi_search 搜索 Reddit 热门讨论
 4. 整合数据，填充中文模板
-5. 转换为 PDF
-6. 发送邮件（主题："半导体早报 | MM-DD"）
+5. 使用 `node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js` 转换为 PDF
+6. 使用 `python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py` 发送邮件（主题："半导体早报 | MM-DD"）
 
 ## 注意事项
 
