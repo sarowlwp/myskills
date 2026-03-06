@@ -53,24 +53,21 @@ exec:
 ```
 kimi_search:
 {
-  "query": "Iran US Israel conflict latest news last 3 hours",
-  "count": 10
+  "query": "Iran US Israel conflict latest news last 3 hours"
 }
 ```
 
 ```
 kimi_search:
 {
-  "query": "伊朗 美国 以色列 冲突 最新消息",
-  "count": 10
+  "query": "伊朗 美国 以色列 冲突 最新消息"
 }
 ```
 
 ```
 kimi_search:
 {
-  "query": "Gaza Hamas Hezbollah attack today",
-  "count": 10
+  "query": "Gaza Hamas Hezbollah attack today"
 }
 ```
 
@@ -78,6 +75,7 @@ kimi_search:
 - 从搜索结果中**只选择发布时间 ≤ 3小时的新闻**
 - **严格排除超过24小时（1天）的旧新闻**，即使出现在搜索结果中
 - 优先选择最近1小时内的新闻，其次是1-3小时内的
+- **确保最终整理至少10条新闻**：如果单次搜索结果不足，尝试更换关键词再次搜索
 
 关键词：Iran, Israel, Gaza, Hamas, Hezbollah, Houthi, Middle East conflict, attack, strike
 
