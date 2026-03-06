@@ -95,7 +95,8 @@ exec: /root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unifi
 kimi_search:
 {
   "query": "Intel NVIDIA AMD TSMC semiconductor stock news last 3 days",
-  "freshness": "pd3"
+  "freshness": "pd3",
+  "count": 10
 }
 ```
 
@@ -103,7 +104,8 @@ kimi_search:
 kimi_search:
 {
   "query": "英特尔 英伟达 AMD 台积电 半导体 芯片 最新消息",
-  "freshness": "pd3"
+  "freshness": "pd3",
+  "count": 10
 }
 ```
 
@@ -111,7 +113,8 @@ kimi_search:
 kimi_search:
 {
   "query": "AI chip GPU data center earnings news today",
-  "freshness": "pd3"
+  "freshness": "pd3",
+  "count": 10
 }
 ```
 
@@ -126,7 +129,8 @@ kimi_search:
 kimi_search:
 {
   "query": "site:reddit.com/r/wallstreetbets Intel NVIDIA AMD semiconductor stock last 3 days",
-  "freshness": "pd3"
+  "freshness": "pd3",
+  "count": 10
 }
 ```
 
@@ -134,7 +138,8 @@ kimi_search:
 kimi_search:
 {
   "query": "site:reddit.com/r/stocks INTC NVDA AMD TSM investment discussion last 3 days",
-  "freshness": "pd3"
+  "freshness": "pd3",
+  "count": 10
 }
 ```
 
@@ -142,7 +147,8 @@ kimi_search:
 kimi_search:
 {
   "query": "site:reddit.com/r/semiconductors chip industry news discussion last 3 days",
-  "freshness": "pd3"
+  "freshness": "pd3",
+  "count": 10
 }
 ```
 
@@ -156,9 +162,15 @@ kimi_search:
 
 ### 4. 生成报告
 
+**⚠️ 重要提示：新闻汇总部分必须包含至少10条最新新闻**
+
 整合数据生成中文报告：
 - 股价表格（中文公司名，含成交量及成交量趋势分析）
-- 新闻摘要（中文）
+- **新闻摘要（中文，至少10条最新新闻）**
+  - 仔细阅读 kimi_search 返回的搜索结果
+  - 提取至少10条最新、最重要的行业新闻
+  - 如果搜索结果不足10条，尝试更换关键词再次搜索
+  - 按公司分类（Intel/NVIDIA/AMD/TSM/行业）整理
 - Reddit 热门讨论（中文翻译/摘要，含点赞数、评论数、情绪倾向）
 - 分析与展望（中文）
 
@@ -188,7 +200,7 @@ exec:
 
 1. **标题区**：半导体早报 | 日期 | 盘前
 2. **股价概览**：中英文对照表格，含涨跌幅、成交量及成交量趋势分析（放量/缩量标识）
-3. **隔夜动态**：美股/亚洲市场重要新闻（中文摘要）
+3. **隔夜动态**：**至少10条**美股/亚洲市场重要新闻（中文摘要）
 4. **今日关注**：重要事件提醒
 5. **开盘展望**：技术面/资金面简评
 
@@ -196,7 +208,7 @@ exec:
 
 1. **标题区**：半导体晚报 | 日期 | 收盘
 2. **收盘数据**：当日涨跌排行，含成交量及成交量趋势分析（放量/缩量标识）
-3. **新闻汇总**：当日重要新闻（分类：Intel/NVIDIA/AMD/行业）
+3. **新闻汇总**：**至少10条**当日重要新闻（分类：Intel/NVIDIA/AMD/行业）
 4. **Reddit热议**：社区热门讨论摘要（中文翻译，含点赞数、评论数、情绪倾向）
 5. **明日展望**：次日关注要点
 
