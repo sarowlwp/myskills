@@ -45,6 +45,11 @@ tools:
 
 **⚠️ 必须发送邮件**：生成报告后，**必须使用 exec 工具执行邮件发送脚本**，将PDF发送到指定邮箱（sarowlwp@gmail.com）。这是任务的强制要求，不可跳过。
 
+**📋 执行日志记录**：每步操作必须记录到 workrecord 日志，格式为 `skill+log+时间`：
+```
+echo "iran-briefing+log+$(date +%Y-%m-%d-%H-%M)" >> /root/.openclaw/workspace/workrecord.log
+```
+
 **发送命令模板**：
 ```
 exec:
