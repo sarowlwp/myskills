@@ -142,22 +142,20 @@ kimi_search:
 - `{{US_MARKET_IMPACT}}` / `{{EU_MARKET_IMPACT}}` / `{{ASIA_MARKET_IMPACT}}` - 股市影响
 - `{{HORMUZ_IMPACT}}` / `{{SHIPPING_COST_IMPACT}}` - 航运影响
 
-### 4. 转换为 PDF
+### 4. 转换为PDF并发送邮件（合并执行）
 
-```bash
-node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js /tmp/iran_briefing.html /tmp/iran_briefing.pdf
-```
-
-### 5. 发送邮件（中文）
-
-**必须使用 exec 工具执行邮件发送脚本：**
+**使用合并脚本一次性完成PDF转换和邮件发送：**
 
 ```
 exec:
 {
-  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py --to sarowlwp@gmail.com --subject '伊朗简报 | MM-DD HH:MM' --body '简报PDF已生成，请查看附件。' --attachments /tmp/iran_briefing.pdf"
+  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/convert_and_send.py /tmp/iran_briefing.html sarowlwp@gmail.com '伊朗简报 | MM-DD HH:MM'"
 }
 ```
+
+**替代方案（分开执行）**：
+- 转换PDF：`node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js <input.html> <output.pdf>`
+- 发送邮件：`python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py --to <recipient> --subject <subject> --attachments <pdf>`
 
 ## 报告结构（四个部分）
 

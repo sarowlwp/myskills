@@ -189,22 +189,20 @@ kimi_search:
 - 标注放量（>120%均值）或缩量（<80%均值）
 - 分析成交量与价格变动的配合关系
 
-### 5. 转换为 PDF
+### 5. 转换为PDF并发送邮件（合并执行）
 
-```bash
-node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js <input.html> <output.pdf>
-```
-
-### 6. 发送邮件
-
-**必须使用 exec 工具执行邮件发送脚本：**
+**使用合并脚本一次性完成PDF转换和邮件发送：**
 
 ```
 exec:
 {
-  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py --to sarowlwp@gmail.com --subject '半导体早报 | MM-DD' --body '报告PDF已生成，请查看附件。' --attachments /tmp/semiconductor_morning.pdf"
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/convert_and_send.py /tmp/semiconductor_morning.html sarowlwp@gmail.com '半导体早报 | MM-DD'"
 }
 ```
+
+**替代方案（分开执行）**：
+- 转换PDF：`node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js <input.html> <output.pdf>`
+- 发送邮件：`python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py --to <recipient> --subject <subject> --attachments <pdf>`
 
 ## 报告结构
 
@@ -283,21 +281,12 @@ kimi_search:
 #### 步骤4：生成HTML报告
 整合上述数据，填充 `assets/morning_template.html` 模板，保存到 `/tmp/semiconductor_morning.html`
 
-#### 步骤5：转换为PDF
-使用 exec 工具执行转换脚本：
+#### 步骤5：转换为PDF并发送邮件
+使用合并脚本一次性完成PDF转换和邮件发送：
 ```
 exec:
 {
-  "command": "node /root/.openclaw/workspace/skills/semiconductor-daily/scripts/html_to_pdf.js /tmp/semiconductor_morning.html /tmp/semiconductor_morning.pdf"
-}
-```
-
-#### 步骤6：发送邮件（必须执行）
-**重要：必须使用 exec 工具执行邮件发送脚本，将PDF发送到指定邮箱**
-```
-exec:
-{
-  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/send_email.py --to sarowlwp@gmail.com --subject '半导体早报 | 03-06' --body '报告PDF已生成，请查看附件。' --attachments /tmp/semiconductor_morning.pdf"
+  "command": "python3 /root/.openclaw/workspace/skills/semiconductor-daily/scripts/convert_and_send.py /tmp/semiconductor_morning.html sarowlwp@gmail.com '半导体早报 | 03-06'"
 }
 ```
 
