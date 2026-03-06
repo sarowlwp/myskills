@@ -95,8 +95,7 @@ exec: /root/.openclaw/workspace/skills/semiconductor-daily/scripts/finnhub_unifi
 kimi_search:
 {
   "query": "Intel NVIDIA AMD TSMC semiconductor stock news last 3 days",
-  "freshness": "pd3",
-  "count": 10
+  "freshness": "pd3"
 }
 ```
 
@@ -104,8 +103,7 @@ kimi_search:
 kimi_search:
 {
   "query": "英特尔 英伟达 AMD 台积电 半导体 芯片 最新消息",
-  "freshness": "pd3",
-  "count": 10
+  "freshness": "pd3"
 }
 ```
 
@@ -113,8 +111,7 @@ kimi_search:
 kimi_search:
 {
   "query": "AI chip GPU data center earnings news today",
-  "freshness": "pd3",
-  "count": 10
+  "freshness": "pd3"
 }
 ```
 
@@ -129,8 +126,7 @@ kimi_search:
 kimi_search:
 {
   "query": "site:reddit.com/r/wallstreetbets Intel NVIDIA AMD semiconductor stock last 3 days",
-  "freshness": "pd3",
-  "count": 10
+  "freshness": "pd3"
 }
 ```
 
@@ -138,8 +134,7 @@ kimi_search:
 kimi_search:
 {
   "query": "site:reddit.com/r/stocks INTC NVDA AMD TSM investment discussion last 3 days",
-  "freshness": "pd3",
-  "count": 10
+  "freshness": "pd3"
 }
 ```
 
@@ -147,8 +142,7 @@ kimi_search:
 kimi_search:
 {
   "query": "site:reddit.com/r/semiconductors chip industry news discussion last 3 days",
-  "freshness": "pd3",
-  "count": 10
+  "freshness": "pd3"
 }
 ```
 
