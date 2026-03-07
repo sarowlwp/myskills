@@ -100,12 +100,37 @@
             border-radius: 2px;
         }
         
+        /* 大盘概览样式 */
+        .market-overview {
+            background: linear-gradient(135deg, #f3e5f5 0%, #ffffff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #7c4dff;
+        }
+        
+        .market-item {
+            display: inline-block;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .market-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .market-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
         /* 股价表格样式 */
         .stock-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            font-size: 14px;
+            font-size: 13px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -114,13 +139,14 @@
         .stock-table th {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 16px 12px;
+            padding: 14px 8px;
             font-weight: 600;
             text-align: center;
+            font-size: 12px;
         }
         
         .stock-table td {
-            padding: 14px 12px;
+            padding: 12px 8px;
             text-align: center;
             border-bottom: 1px solid #f0f0f0;
             background: white;
@@ -140,30 +166,50 @@
         }
         
         .stock-code {
-            font-size: 12px;
+            font-size: 11px;
             color: #888;
             background: #f0f0f0;
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 4px;
-            margin-left: 5px;
+            margin-left: 4px;
         }
         
         .positive {
             color: #00c853;
             font-weight: 700;
-            background: #e8f5e9;
-            padding: 4px 10px;
-            border-radius: 20px;
-            display: inline-block;
         }
         
         .negative {
             color: #ff1744;
             font-weight: 700;
+        }
+        
+        /* 量能标签 */
+        .volume-tag {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .volume-up-big {
             background: #ffebee;
-            padding: 4px 10px;
-            border-radius: 20px;
-            display: inline-block;
+            color: #c62828;
+        }
+        
+        .volume-up-down {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .volume-down {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .volume-normal {
+            background: #f5f5f5;
+            color: #666;
         }
         
         /* 新闻卡片样式 */
@@ -174,12 +220,6 @@
             margin-bottom: 15px;
             border-left: 4px solid #667eea;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         .news-title {
@@ -193,14 +233,96 @@
             font-size: 12px;
             color: #888;
             margin-bottom: 10px;
-            display: flex;
-            gap: 15px;
         }
         
         .news-summary {
             font-size: 14px;
             color: #555;
             line-height: 1.7;
+        }
+        
+        /* INTC特别关注样式 */
+        .intc-section {
+            background: linear-gradient(135deg, #e8eaf6 0%, #ffffff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #3f51b5;
+            margin-bottom: 20px;
+        }
+        
+        .intc-title {
+            font-weight: 700;
+            color: #3f51b5;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .intc-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #c5cae9;
+        }
+        
+        .intc-item:last-child {
+            border-bottom: none;
+        }
+        
+        .intc-item-title {
+            font-weight: 600;
+            color: #283593;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .intc-item-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        /* Reddit样式 */
+        .reddit-card {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffffff 100%);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-left: 4px solid #e65100;
+        }
+        
+        .reddit-title {
+            font-weight: 600;
+            color: #e65100;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        
+        .reddit-meta {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+        
+        .reddit-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .sentiment-bullish {
+            color: #00c853;
+            font-weight: 600;
+        }
+        
+        .sentiment-bearish {
+            color: #ff1744;
+            font-weight: 600;
+        }
+        
+        .sentiment-neutral {
+            color: #ff9800;
+            font-weight: 600;
         }
         
         /* 关注事项样式 */
@@ -272,10 +394,6 @@
             border-top: 1px solid #e0e0e0;
         }
         
-        .footer p {
-            margin: 5px 0;
-        }
-        
         .disclaimer {
             color: #aaa;
             font-size: 11px;
@@ -292,16 +410,38 @@
         </div>
 
         <div class="content">
-            <!-- 股价概览 -->
+            <!-- 昨日大盘回顾 -->
             <div class="section">
-                <div class="section-title">股价概览</div>
+                <div class="section-title">昨日大盘回顾</div>
+                <div class="market-overview">
+                    <div class="market-item">
+                        <div class="market-label">纳斯达克</div>
+                        <div class="market-value {{NASDAQ_CHANGE_CLASS}}">{{NASDAQ_VALUE}} {{NASDAQ_CHANGE}}</div>
+                    </div>
+                    <div class="market-item">
+                        <div class="market-label">费城半导体(SOX)</div>
+                        <div class="market-value {{SOX_CHANGE_CLASS}}">{{SOX_VALUE}} {{SOX_CHANGE}}</div>
+                    </div>
+                    <div class="market-item">
+                        <div class="market-label">半导体板块资金流向</div>
+                        <div class="market-value">{{SECTOR_FLOW}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 个股数据表 -->
+            <div class="section">
+                <div class="section-title">个股数据</div>
                 <table class="stock-table">
                     <tr>
                         <th>公司</th>
-                        <th>价格(USD)</th>
+                        <th>价格</th>
                         <th>涨跌</th>
                         <th>涨跌幅</th>
-                        <th>成交量</th>
+                        <th>成交量<br>(万股)</th>
+                        <th>成交额<br>(亿美元)</th>
+                        <th>20日均量<br>对比</th>
+                        <th>量能</th>
                     </tr>
                     <tr>
                         <td><span class="stock-name">英特尔</span><span class="stock-code">INTC</span></td>
@@ -309,6 +449,9 @@
                         <td class="{{INTC_CHANGE_CLASS}}">{{INTC_CHANGE}}</td>
                         <td class="{{INTC_CHANGE_CLASS}}">{{INTC_CHANGE_PCT}}</td>
                         <td>{{INTC_VOLUME}}</td>
+                        <td>{{INTC_TURNOVER}}</td>
+                        <td>{{INTC_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{INTC_VOL_TAG_CLASS}}">{{INTC_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">英伟达</span><span class="stock-code">NVDA</span></td>
@@ -316,6 +459,9 @@
                         <td class="{{NVDA_CHANGE_CLASS}}">{{NVDA_CHANGE}}</td>
                         <td class="{{NVDA_CHANGE_CLASS}}">{{NVDA_CHANGE_PCT}}</td>
                         <td>{{NVDA_VOLUME}}</td>
+                        <td>{{NVDA_TURNOVER}}</td>
+                        <td>{{NVDA_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{NVDA_VOL_TAG_CLASS}}">{{NVDA_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">超微</span><span class="stock-code">AMD</span></td>
@@ -323,6 +469,9 @@
                         <td class="{{AMD_CHANGE_CLASS}}">{{AMD_CHANGE}}</td>
                         <td class="{{AMD_CHANGE_CLASS}}">{{AMD_CHANGE_PCT}}</td>
                         <td>{{AMD_VOLUME}}</td>
+                        <td>{{AMD_TURNOVER}}</td>
+                        <td>{{AMD_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{AMD_VOL_TAG_CLASS}}">{{AMD_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">台积电</span><span class="stock-code">TSM</span></td>
@@ -330,6 +479,9 @@
                         <td class="{{TSM_CHANGE_CLASS}}">{{TSM_CHANGE}}</td>
                         <td class="{{TSM_CHANGE_CLASS}}">{{TSM_CHANGE_PCT}}</td>
                         <td>{{TSM_VOLUME}}</td>
+                        <td>{{TSM_TURNOVER}}</td>
+                        <td>{{TSM_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{TSM_VOL_TAG_CLASS}}">{{TSM_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">高通</span><span class="stock-code">QCOM</span></td>
@@ -337,6 +489,9 @@
                         <td class="{{QCOM_CHANGE_CLASS}}">{{QCOM_CHANGE}}</td>
                         <td class="{{QCOM_CHANGE_CLASS}}">{{QCOM_CHANGE_PCT}}</td>
                         <td>{{QCOM_VOLUME}}</td>
+                        <td>{{QCOM_TURNOVER}}</td>
+                        <td>{{QCOM_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{QCOM_VOL_TAG_CLASS}}">{{QCOM_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">美光</span><span class="stock-code">MU</span></td>
@@ -344,6 +499,9 @@
                         <td class="{{MU_CHANGE_CLASS}}">{{MU_CHANGE}}</td>
                         <td class="{{MU_CHANGE_CLASS}}">{{MU_CHANGE_PCT}}</td>
                         <td>{{MU_VOLUME}}</td>
+                        <td>{{MU_TURNOVER}}</td>
+                        <td>{{MU_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{MU_VOL_TAG_CLASS}}">{{MU_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">ASML</span><span class="stock-code">ASML</span></td>
@@ -351,6 +509,9 @@
                         <td class="{{ASML_CHANGE_CLASS}}">{{ASML_CHANGE}}</td>
                         <td class="{{ASML_CHANGE_CLASS}}">{{ASML_CHANGE_PCT}}</td>
                         <td>{{ASML_VOLUME}}</td>
+                        <td>{{ASML_TURNOVER}}</td>
+                        <td>{{ASML_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{ASML_VOL_TAG_CLASS}}">{{ASML_VOL_TAG}}</span></td>
                     </tr>
                     <tr>
                         <td><span class="stock-name">博通</span><span class="stock-code">AVGO</span></td>
@@ -358,6 +519,9 @@
                         <td class="{{AVGO_CHANGE_CLASS}}">{{AVGO_CHANGE}}</td>
                         <td class="{{AVGO_CHANGE_CLASS}}">{{AVGO_CHANGE_PCT}}</td>
                         <td>{{AVGO_VOLUME}}</td>
+                        <td>{{AVGO_TURNOVER}}</td>
+                        <td>{{AVGO_VOL_COMPARE}}</td>
+                        <td><span class="volume-tag {{AVGO_VOL_TAG_CLASS}}">{{AVGO_VOL_TAG}}</span></td>
                     </tr>
                 </table>
             </div>
@@ -365,7 +529,23 @@
             <!-- 隔夜动态 -->
             <div class="section">
                 <div class="section-title">隔夜动态</div>
+                <p style="font-size: 12px; color: #888; margin-bottom: 15px;">新闻时效：最近7天内 | 数据来源：Kimi Search</p>
                 {{NEWS_CONTENT}}
+            </div>
+
+            <!-- INTC特别关注 -->
+            <div class="section">
+                <div class="section-title">🔵 INTC 特别关注</div>
+                <div class="intc-section">
+                    <div class="intc-title">📌 英特尔近期重大事件跟踪</div>
+                    {{INTC_SPECIAL_CONTENT}}
+                </div>
+            </div>
+
+            <!-- Reddit热议 -->
+            <div class="section">
+                <div class="section-title">Reddit 热议</div>
+                {{REDDIT_CONTENT}}
             </div>
 
             <!-- 今日关注 -->
@@ -373,20 +553,20 @@
                 <div class="section-title">今日关注</div>
                 <div class="focus-grid">
                     <div class="focus-item">
-                        <strong>🔹 英特尔 18A 制程进展</strong>
-                        <p>关注良率提升及大客户订单动态</p>
+                        <strong>🔹 NVIDIA GTC 2026大会</strong>
+                        <p>3月中旬将发布LPU芯片及费曼架构GPU</p>
                     </div>
                     <div class="focus-item">
-                        <strong>🔹 英伟达数据中心收入</strong>
-                        <p>AI 芯片需求持续性及竞争格局变化</p>
+                        <strong>🔹 台积电2nm产能布局</strong>
+                        <p>关注520-560亿美元资本开支执行</p>
                     </div>
                     <div class="focus-item">
-                        <strong>🔹 AMD MI350 市场采用</strong>
-                        <p>云服务商部署进展及市场份额争夺</p>
+                        <strong>🔹 英特尔18A制程良率</strong>
+                        <p>关注Clearwater Forest及Panther Lake量产</p>
                     </div>
                     <div class="focus-item">
-                        <strong>🔹 美联储利率决议</strong>
-                        <p>宏观环境对科技股的影响</p>
+                        <strong>🔹 存储芯片供需</strong>
+                        <p>关注HBM4研发及DDR6过渡</p>
                     </div>
                 </div>
             </div>

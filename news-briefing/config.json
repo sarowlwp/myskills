@@ -1,0 +1,51 @@
+{
+  "iran": {
+    "name": "伊朗局势简报",
+    "description": "美伊冲突最新动态",
+    "search_queries": [
+      "Iran US conflict latest news last 2 hours",
+      "Trump Iran attack today",
+      "伊朗 美国 冲突 最新消息"
+    ],
+    "schedule": "0 */2 * * *",
+    "recipient": "sarowlwp@gmail.com",
+    "subject_prefix": "🔴 伊朗局势简报",
+    "sanitize_words": {
+      "战争": "冲tu",
+      "war": "conflict",
+      "攻击": "行dong",
+      "attack": "action",
+      "死亡": "伤wang",
+      "death": "casualty",
+      "炸": "轰",
+      "bomb": "strike",
+      "杀": "伤",
+      "kill": "harm",
+      "导弹": "飞行wu",
+      "missile": "projectile"
+    }
+  },
+  "semiconductor": {
+    "name": "半导体日报",
+    "description": "半导体行业股票和新闻",
+    "search_queries": [
+      "INTC Intel stock news last 7 days",
+      "NVDA AMD TSM stock news last 7 days"
+    ],
+    "schedule": "30 7 * * *",
+    "recipient": "sarowlwp@gmail.com",
+    "subject_prefix": "📊 半导体日报"
+  },
+  "ai": {
+    "name": "AI新闻简报",
+    "description": "人工智能行业最新动态",
+    "search_queries": [
+      "OpenAI news today",
+      "Anthropic Claude news today",
+      "AI artificial intelligence news today"
+    ],
+    "schedule": "0 9 * * *",
+    "recipient": "sarowlwp@gmail.com",
+    "subject_prefix": "🤖 AI新闻简报"
+  }
+}

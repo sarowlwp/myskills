@@ -1,0 +1,8 @@
+{
+  "id": "custom-smtp-sender",
+  "name": "Custom SMTP Sender",
+  "description": "A skill to send emails with support for markdown, HTML text, and attachments, leveraging existing SMTP configuration. Includes retry logic and logging.",
+  "version": "1.0.0",
+  "author": "scccmsd",
+  "tools": ["send"]
+}

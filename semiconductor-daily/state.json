@@ -1,0 +1,123 @@
+{
+  "seen_filings": {
+    "0000050863-26-000049": {
+      "ticker": "INTC",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 19:57:09",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1330891/000005086326000049/0000050863-26-000049-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1330891/000005086326000049/form4.xml",
+      "detected_at": "2026-03-06T14:39:57.427043"
+    },
+    "0000050863-26-000048": {
+      "ticker": "INTC",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 19:56:24",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1008463/000005086326000048/0000050863-26-000048-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1008463/000005086326000048/form4.xml",
+      "detected_at": "2026-03-06T14:39:57.427109"
+    },
+    "0000050863-26-000047": {
+      "ticker": "INTC",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 19:55:26",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1243821/000005086326000047/0000050863-26-000047-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1243821/000005086326000047/form4.xml",
+      "detected_at": "2026-03-06T14:39:57.427131"
+    },
+    "0000050863-26-000046": {
+      "ticker": "INTC",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 19:54:23",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/2082075/000005086326000046/0000050863-26-000046-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/2082075/000005086326000046/form4.xml",
+      "detected_at": "2026-03-06T14:39:57.427148"
+    },
+    "0000050863-26-000045": {
+      "ticker": "INTC",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 19:53:24",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1680881/000005086326000045/0000050863-26-000045-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1680881/000005086326000045/form4.xml",
+      "detected_at": "2026-03-06T14:39:57.427171"
+    },
+    "0000050863-26-000044": {
+      "ticker": "INTC",
+      "form": "8-K",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 16:06:00",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000044/0000050863-26-000044-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000044/intc-20260227.htm",
+      "detected_at": "2026-03-06T14:39:57.427189"
+    },
+    "0001347842-26-000007": {
+      "ticker": "NVDA",
+      "form": "4",
+      "filed_date": "2026-03-04 00:00:00",
+      "accepted_date": "2026-03-04 17:33:32",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000134784226000007/0001347842-26-000007-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1045810/000134784226000007/wk-form4_1772663608.xml",
+      "detected_at": "2026-03-06T14:39:58.432591"
+    },
+    "0001283854-26-000002": {
+      "ticker": "NVDA",
+      "form": "4",
+      "filed_date": "2026-03-04 00:00:00",
+      "accepted_date": "2026-03-04 17:32:42",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000128385426000002/0001283854-26-000002-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1045810/000128385426000002/wk-form4_1772663559.xml",
+      "detected_at": "2026-03-06T14:39:58.432609"
+    },
+    "0001588670-26-000006": {
+      "ticker": "NVDA",
+      "form": "4",
+      "filed_date": "2026-03-04 00:00:00",
+      "accepted_date": "2026-03-04 17:31:54",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000158867026000006/0001588670-26-000006-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1045810/000158867026000006/wk-form4_1772663512.xml",
+      "detected_at": "2026-03-06T14:39:58.432620"
+    },
+    "0001696841-26-000002": {
+      "ticker": "NVDA",
+      "form": "4",
+      "filed_date": "2026-03-04 00:00:00",
+      "accepted_date": "2026-03-04 17:31:08",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000169684126000002/0001696841-26-000002-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1045810/000169684126000002/wk-form4_1772663465.xml",
+      "detected_at": "2026-03-06T14:39:58.432630"
+    },
+    "0001197649-26-000003": {
+      "ticker": "NVDA",
+      "form": "4",
+      "filed_date": "2026-03-04 00:00:00",
+      "accepted_date": "2026-03-04 17:30:08",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1045810/000119764926000003/0001197649-26-000003-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1045810/000119764926000003/wk-form4_1772663406.xml",
+      "detected_at": "2026-03-06T14:39:58.432640"
+    },
+    "0000002488-26-000052": {
+      "ticker": "AMD",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 16:15:06",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1985800/000000248826000052/0000002488-26-000052-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1985800/000000248826000052/wk-form4_1772572498.xml",
+      "detected_at": "2026-03-06T14:40:00.580438"
+    },
+    "0000002488-26-000050": {
+      "ticker": "AMD",
+      "form": "4",
+      "filed_date": "2026-03-03 00:00:00",
+      "accepted_date": "2026-03-03 16:13:03",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1452385/000000248826000050/0000002488-26-000050-index.html",
+      "report_url": "https://www.sec.gov/Archives/edgar/data/1452385/000000248826000050/wk-form4_1772572381.xml",
+      "detected_at": "2026-03-06T14:40:00.580458"
+    }
+  },
+  "seeded": true,
+  "last_run": "2026-03-07T07:23:25.371242"
+}
