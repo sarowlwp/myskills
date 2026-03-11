@@ -1,9 +1,9 @@
 ---
 name: iran-briefing
-description: Generate Iran-US conflict briefing reports in Chinese with real-time news from kimi_search, PDF generation, and email delivery. Use when user needs to create or send Iran conflict situation reports in Chinese, including news aggregation from the last 3 hours, HTML/PDF formatting, and SMTP email sending.
+description: 生成伊朗-美国冲突局势中文简报，整合 Kimi 搜索实时新闻、PDF 生成和邮件发送功能。使用当用户需要创建或发送伊朗冲突局势报告时，包含新闻聚合、HTML/PDF 格式化和 SMTP 邮件发送。
 ---
 
-# Iran Briefing Skill (伊朗简报)
+# 伊朗简报 (Iran Briefing)
 
 生成专业的伊朗-美国冲突局势简报，使用中文输出，包含四个主要部分。
 
@@ -53,21 +53,32 @@ exec:
 ```
 kimi_search:
 {
-  "query": "Iran US Israel conflict latest news last 3 hours"
+  "query": "Iran US Israel conflict latest news last 3 hours",
+  "freshness": "pd1"
 }
 ```
 
 ```
 kimi_search:
 {
-  "query": "伊朗 美国 以色列 冲突 最新消息"
+  "query": "伊朗 美国 以色列 冲突 最新消息 今天",
+  "freshness": "pd1"
 }
 ```
 
 ```
 kimi_search:
 {
-  "query": "Gaza Hamas Hezbollah attack today"
+  "query": "Gaza Hamas Hezbollah attack strike today",
+  "freshness": "pd1"
+}
+```
+
+```
+kimi_search:
+{
+  "query": "Houthi Yemen Red Sea shipping attack",
+  "freshness": "pd1"
 }
 ```
 
@@ -77,7 +88,10 @@ kimi_search:
 - 优先选择最近1小时内的新闻，其次是1-3小时内的
 - **确保最终整理至少10条新闻**：如果单次搜索结果不足，尝试更换关键词再次搜索
 
-关键词：Iran, Israel, Gaza, Hamas, Hezbollah, Houthi, Middle East conflict, attack, strike
+**关键词组合建议**：
+- Iran, Israel, Gaza, Hamas, Hezbollah, Houthi
+- Middle East conflict, attack, strike, missile
+- 伊朗, 以色列, 加沙, 哈马斯, 真主党, 胡塞武装
 
 ### 2. 整合新闻内容（中文）
 
@@ -87,18 +101,22 @@ kimi_search:
 
 **第一部分：动态总结**
 - 用一句话总结当前局势
+- 突出最关键的动态和变化
 
 **第二部分：最新事件（至少10条，必须达成）**
 - 仔细阅读搜索结果，提取所有相关新闻
 - 如果搜索结果超过10条，优先选择最新、最重要的10条以上
 - 如果搜索结果不足10条，尝试更换搜索关键词再次搜索，直到凑齐至少10条
 - 每条事件必须包含：标题（中文）、发生时间、来源、链接、中文摘要（100-150字）
-每条事件包含：
-- 标题（中文）
-- 发生时间
-- 来源（媒体名称）
-- 链接（原文链接）
-- 中文摘要（100-150字）
+
+**新闻事件格式示例**：
+```
+标题：[中文标题，简洁明了]
+时间：YYYY-MM-DD HH:MM
+来源：媒体名称
+链接：https://...
+摘要：[100-150字中文摘要，概括事件要点和影响]
+```
 
 **第三部分：各方表态**
 - 🇮🇷 伊朗方面（伊朗政府/军方/外交部表态）
@@ -115,19 +133,32 @@ kimi_search:
 
 使用 `assets/template.html` 中的变量填充内容：
 
-**模板变量：**
-- `{{TIMESTAMP}}` - 生成时间
-- `{{SUMMARY}}` - 动态总结
-- `{{EVENT1_TITLE}}` 到 `{{EVENT10_SUMMARY}}` - 10条事件详情
-- `{{IRAN_STATEMENT_PARTY}}` / `{{IRAN_STATEMENT_CONTENT}}` - 伊朗表态
-- `{{US_STATEMENT_PARTY}}` / `{{US_STATEMENT_CONTENT}}` - 美国表态
-- `{{ISRAEL_STATEMENT_PARTY}}` / `{{ISRAEL_STATEMENT_CONTENT}}` - 以色列表态
-- `{{INTL_STATEMENT_PARTY}}` / `{{INTL_STATEMENT_CONTENT}}` - 国际表态
-- `{{OIL_PRICE}}` / `{{OIL_CHANGE}}` / `{{OIL_IMPACT}}` - 原油价格及影响
-- `{{GOLD_PRICE}}` / `{{GOLD_CHANGE}}` / `{{GOLD_IMPACT}}` - 黄金价格及影响
-- `{{GAS_PRICE}}` / `{{GAS_CHANGE}}` / `{{GAS_IMPACT}}` - 天然气价格及影响
-- `{{US_MARKET_IMPACT}}` / `{{EU_MARKET_IMPACT}}` / `{{ASIA_MARKET_IMPACT}}` - 股市影响
-- `{{HORMUZ_IMPACT}}` / `{{SHIPPING_COST_IMPACT}}` - 航运影响
+**模板变量列表**：
+
+| 变量名 | 说明 |
+|--------|------|
+| `{{TIMESTAMP}}` | 生成时间 |
+| `{{SUMMARY}}` | 动态总结 |
+| `{{EVENT1_TITLE}}` ~ `{{EVENT10_TITLE}}` | 事件1-10标题 |
+| `{{EVENT1_TIME}}` ~ `{{EVENT10_TIME}}` | 事件1-10时间 |
+| `{{EVENT1_SOURCE}}` ~ `{{EVENT10_SOURCE}}` | 事件1-10来源 |
+| `{{EVENT1_LINK}}` ~ `{{EVENT10_LINK}}` | 事件1-10链接 |
+| `{{EVENT1_SUMMARY}}` ~ `{{EVENT10_SUMMARY}}` | 事件1-10摘要 |
+| `{{IRAN_STATEMENT_PARTY}}` / `{{IRAN_STATEMENT_CONTENT}}` | 伊朗表态 |
+| `{{US_STATEMENT_PARTY}}` / `{{US_STATEMENT_CONTENT}}` | 美国表态 |
+| `{{ISRAEL_STATEMENT_PARTY}}` / `{{ISRAEL_STATEMENT_CONTENT}}` | 以色列表态 |
+| `{{INTL_STATEMENT_PARTY}}` / `{{INTL_STATEMENT_CONTENT}}` | 国际表态 |
+| `{{OIL_PRICE}}` / `{{OIL_CHANGE}}` / `{{OIL_CHANGE_PCT}}` / `{{OIL_CHANGE_CLASS}}` / `{{OIL_IMPACT}}` | 原油数据 |
+| `{{GOLD_PRICE}}` / `{{GOLD_CHANGE}}` / `{{GOLD_CHANGE_PCT}}` / `{{GOLD_CHANGE_CLASS}}` / `{{GOLD_IMPACT}}` | 黄金数据 |
+| `{{GAS_PRICE}}` / `{{GAS_CHANGE}}` / `{{GAS_CHANGE_PCT}}` / `{{GAS_CHANGE_CLASS}}` / `{{GAS_IMPACT}}` | 天然气数据 |
+| `{{US_MARKET_IMPACT}}` | 美股影响 |
+| `{{EU_MARKET_IMPACT}}` | 欧洲市场影响 |
+| `{{ASIA_MARKET_IMPACT}}` | 亚太市场影响 |
+| `{{HORMUZ_IMPACT}}` | 霍尔木兹海峡影响 |
+| `{{SHIPPING_COST_IMPACT}}` | 航运成本影响 |
+
+**涨跌样式类**：
+- `{{OIL_CHANGE_CLASS}}`、`{{GOLD_CHANGE_CLASS}}`、`{{GAS_CHANGE_CLASS}}` 应填入 `price-up`（上涨/绿色）或 `price-down`（下跌/红色）
 
 ### 4. 转换为PDF并发送邮件（合并执行）
 
@@ -170,18 +201,25 @@ exec:
 
 ## 样式指南
 
-- **主标题**：红色 (#d32f2f)，居中
-- **章节标题**：蓝色 (#1976d2)，左侧边框
-- **动态总结**：橙色 (#ff9800) 背景
-- **新闻事件**：绿色左侧边框
-- **各方表态**：绿色背景
-- **金融影响**：蓝色背景
-- **风险预警**：红色 (#c62828) 背景
-- **字体**：中文字体（Noto Sans SC, PingFang SC, Microsoft YaHei）
+| 元素 | 样式 |
+|------|------|
+| **主标题** | 红色 (#d32f2f)，居中 |
+| **章节标题** | 蓝色 (#1976d2)，左侧边框 |
+| **动态总结** | 橙色 (#ff9800) 背景 |
+| **新闻事件** | 绿色左侧边框 (#4caf50) |
+| **各方表态** | 绿色背景 (#e8f5e9) |
+| **金融影响** | 蓝色背景 (#e3f2fd) |
+| **风险预警** | 红色 (#c62828) 背景 |
+| **上涨** | 绿色 (#4caf50) |
+| **下跌** | 红色 (#f44336) |
+| **字体** | Noto Sans SC, PingFang SC, Microsoft YaHei |
 
 ## 资源文件
 
 - `assets/template.html` - HTML 报告模板（中文，四部分结构）
+- `scripts/send_email.py` - 邮件发送脚本
+- `scripts/convert_and_send.py` - PDF转换与邮件发送合并脚本
+- `scripts/html_to_pdf.js` - HTML转PDF脚本
 
 ## 使用示例
 
@@ -191,54 +229,62 @@ exec:
 
 **完整执行流程**:
 
-#### 步骤1：搜索最新新闻
+#### 步骤1：获取当前时间
+首先获取系统当前时间，用于确定新闻时效范围：
+```
+session_status
+```
+
+#### 步骤2：搜索最新新闻
 使用 kimi_search 工具搜索最近3小时的新闻：
 ```
 kimi_search:
 {
-  "query": "Iran US Israel conflict latest news last 3 hours 2026"
+  "query": "Iran US Israel conflict latest news last 3 hours",
+  "freshness": "pd1"
 }
 ```
 
 ```
 kimi_search:
 {
-  "query": "伊朗 美国 以色列 冲突 最新消息"
+  "query": "伊朗 美国 以色列 冲突 最新消息 今天",
+  "freshness": "pd1"
 }
 ```
 
 ```
 kimi_search:
 {
-  "query": "Gaza Hamas Hezbollah attack today"
+  "query": "Gaza Hamas Hezbollah attack today",
+  "freshness": "pd1"
 }
 ```
 
-#### 步骤2：整合新闻内容
+```
+kimi_search:
+{
+  "query": "Houthi Yemen Red Sea shipping attack",
+  "freshness": "pd1"
+}
+```
+
+#### 步骤3：整合新闻内容
 将搜索结果整合为四个部分：
 - **动态总结**：一句话概括当前局势
 - **最新事件**：至少10条可信事件（含标题、时间、来源、链接、中文摘要）
 - **各方表态**：伊朗、美国、以色列、国际社会
 - **金融影响**：原油、黄金、股市、航运
 
-#### 步骤3：生成HTML报告
+#### 步骤4：生成HTML报告
 填充 `assets/template.html` 模板中的变量，保存到 `/tmp/iran_briefing.html`
 
-#### 步骤4：转换为PDF
-使用 exec 工具执行转换脚本：
+#### 步骤5：转换为PDF并发送邮件
+使用合并脚本一次性完成PDF转换和邮件发送：
 ```
 exec:
 {
-  "command": "node /root/.openclaw/workspace/skills/iran-briefing/scripts/html_to_pdf.js /tmp/iran_briefing.html /tmp/iran_briefing.pdf"
-}
-```
-
-#### 步骤5：发送邮件（必须执行）
-**重要：必须使用 exec 工具执行邮件发送脚本，将PDF发送到指定邮箱**
-```
-exec:
-{
-  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/send_email.py --to your-email@example.com --subject '伊朗简报 | 03-06 12:00' --body '简报PDF已生成，请查看附件。' --attachments /tmp/iran_briefing.pdf"
+  "command": "python3 /root/.openclaw/workspace/skills/iran-briefing/scripts/convert_and_send.py /tmp/iran_briefing.html your-email@example.com '伊朗简报 | 03-11 15:30'"
 }
 ```
 
@@ -264,7 +310,9 @@ exec:
 ## 注意事项
 
 - **必须使用 kimi_search** 获取最新新闻，而不是仅依赖 RSS
+- **使用 `freshness: "pd1"` 参数**确保只获取1天内的新闻
 - **至少10条最新事件**，每条包含标题、时间、来源、链接、中文摘要
 - **所有输出必须是中文**
 - 新闻时间范围：**最近 3 小时内**（严格排除超过24小时的新闻）
 - 邮件主题使用中文："伊朗简报 | MM-DD HH:MM"
+- 报告中的价格数据应注明时间戳
