@@ -59,7 +59,9 @@ def generate_unsubscribe_link(to_email):
     """生成退订链接"""
     import hashlib
     token = hashlib.md5(f"{to_email}:unsubscribe".encode()).hexdigest()[:16]
-    return f"https://your-domain.com/unsubscribe?email={to_email}&token={token}"
+    # 退订链接 - 请替换为你的实际域名
+    base_url = os.environ.get('UNSUBSCRIBE_BASE_URL', 'https://your-domain.com')
+    return f"{base_url}/unsubscribe?email={to_email}&token={token}"
 
 def sanitize_content(body):
     """清理敏感词汇，避免垃圾邮件过滤"""
