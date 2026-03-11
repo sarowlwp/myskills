@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-邮件发送脚本 - 用于热点简报
+邮件发送脚本 - 用于新闻简报
 支持环境变量、命令行参数和配置文件多种配置方式
 """
 
@@ -17,9 +17,9 @@ from email.mime.text import MIMEText
 from pathlib import Path
 
 # 默认配置路径（可通过环境变量覆盖）
-DEFAULT_CONFIG_DIR = Path(os.environ.get('HOTSPOT_CONFIG_DIR', Path.home() / ".config" / "hotspot-briefing"))
+DEFAULT_CONFIG_DIR = Path(os.environ.get('NEWS_CONFIG_DIR', Path.home() / ".config" / "news-briefing"))
 DEFAULT_CONFIG_PATH = DEFAULT_CONFIG_DIR / "smtp-config.json"
-DEFAULT_LOG_DIR = Path(os.environ.get('HOTSPOT_LOG_DIR', Path.home() / ".local" / "log" / "hotspot-briefing"))
+DEFAULT_LOG_DIR = Path(os.environ.get('NEWS_LOG_DIR', Path.home() / ".local" / "log" / "news-briefing"))
 DEFAULT_LOG_PATH = DEFAULT_LOG_DIR / "smtp-sender.log"
 
 
@@ -52,22 +52,22 @@ def get_logger(log_path=None, verbose=False):
 def load_config(config_path=None):
     """
     加载SMTP配置，优先级：
-    1. 环境变量 HOTSPOT_SMTP_JSON（JSON字符串）
-    2. 环境变量 HOTSPOT_SMTP_CONFIG（配置文件路径）
+    1. 环境变量 NEWS_SMTP_JSON（JSON字符串）
+    2. 环境变量 NEWS_SMTP_CONFIG（配置文件路径）
     3. 命令行指定的配置文件
     4. 默认配置文件
     """
     # 优先级1：环境变量 JSON
-    env_json = os.environ.get('HOTSPOT_SMTP_JSON')
+    env_json = os.environ.get('NEWS_SMTP_JSON')
     if env_json:
         try:
             return json.loads(env_json)
         except json.JSONDecodeError as e:
-            print(f"环境变量 HOTSPOT_SMTP_JSON 格式错误: {e}")
+            print(f"环境变量 NEWS_SMTP_JSON 格式错误: {e}")
 
     # 优先级2/3/4：配置文件
     config_file = (
-        os.environ.get('HOTSPOT_SMTP_CONFIG') or  # 环境变量指定
+        os.environ.get('NEWS_SMTP_CONFIG') or  # 环境变量指定
         config_path or                             # 命令行指定
         DEFAULT_CONFIG_PATH                        # 默认路径
     )
@@ -78,8 +78,8 @@ def load_config(config_path=None):
         raise FileNotFoundError(
             f"配置文件不存在: {config_file}\n"
             f"请通过以下方式之一提供配置:\n"
-            f"  1. 设置 HOTSPOT_SMTP_JSON 环境变量（JSON字符串）\n"
-            f"  2. 设置 HOTSPOT_SMTP_CONFIG 环境变量（配置文件路径）\n"
+            f"  1. 设置 NEWS_SMTP_JSON 环境变量（JSON字符串）\n"
+            f"  2. 设置 NEWS_SMTP_CONFIG 环境变量（配置文件路径）\n"
             f"  3. 使用 --config 参数指定配置文件\n"
             f"  4. 创建默认配置文件: {DEFAULT_CONFIG_PATH}\n\n"
             f"配置格式示例:\n"
@@ -167,7 +167,7 @@ def main():
     args = parser.parse_args()
 
     # 设置日志
-    log_path = args.log or DEFAULT_LOG_PATH if not os.environ.get('HOTSPOT_NO_LOG') else None
+    log_path = args.log or DEFAULT_LOG_PATH if not os.environ.get('NEWS_NO_LOG') else None
     logger = get_logger(log_path=log_path, verbose=args.verbose)
 
     try:

@@ -1,18 +1,18 @@
 ---
-name: hotspot-briefing
-description: 生成指定热点新闻主题的中文简报，支持自定义热点关键词，整合 Kimi 搜索实时新闻、PDF 生成和邮件发送功能。使用当用户需要针对特定热点事件（如国际冲突、科技突破、财经事件等）创建新闻简报并发送邮件时。
+name: news-briefing
+description: 生成指定新闻主题的中文简报，支持自定义关键词，整合 Kimi 搜索实时新闻、PDF 生成和邮件发送功能。适用于国际局势、科技动态、财经事件、行业资讯等各类新闻追踪。
 ---
 
-# 热点新闻简报 (Hotspot Briefing)
+# 新闻简报 (News Briefing)
 
-生成指定热点主题的实时新闻简报，使用中文输出，包含四个主要部分。支持自定义热点关键词，适用于国际局势、科技动态、财经事件等各类热点追踪。
+生成指定新闻主题的实时简报，使用中文输出，包含四个主要部分。支持自定义关键词，适用于国际局势、科技动态、财经事件、行业资讯等各类新闻追踪。
 
 **可用工具**：kimi_search（搜索新闻）、exec（执行命令/脚本）
 
 ## 概述
 
 本技能创建全面的热点主题简报，用户需提供：
-1. **热点主题** - 简报的核心关键词/主题（如：俄乌冲突、美联储议息、AI技术突破等）
+1. **主题** - 简报的核心关键词/主题（如：俄乌冲突、美联储议息、AI技术突破等）
 2. **目标邮箱** - 接收简报的邮箱地址
 
 简报包含四个主要部分：
@@ -29,21 +29,21 @@ description: 生成指定热点新闻主题的中文简报，支持自定义热�
 
 **📋 执行日志记录**（可选）：每步操作可记录到日志：
 ```
-echo "hotspot-briefing+log+$(date +%Y-%m-%d-%H-%M)" >> ~/.local/log/hotspot-briefing/workrecord.log
+echo "news-briefing+log+$(date +%Y-%m-%d-%H-%M)" >> ~/.local/log/news-briefing/workrecord.log
 ```
 
 **发送命令模板**（使用相对路径或环境变量）：
 ```
 exec:
 {
-  "command": "python3 scripts/send_email.py --to <目标邮箱> --subject '<主题>简报 | MM-DD HH:MM' --body '简报PDF已生成，请查看附件。' --attachments /tmp/hotspot_briefing.pdf"
+  "command": "python3 scripts/send_email.py --to <目标邮箱> --subject '<主题>简报 | MM-DD HH:MM' --body '简报PDF已生成，请查看附件。' --attachments /tmp/news_briefing.pdf"
 }
 ```
 
 **环境变量配置**（推荐）：
-- `HOTSPOT_SKILL_DIR` - Skill 根目录（自动检测，通常无需设置）
-- `HOTSPOT_SMTP_JSON` - SMTP 配置 JSON 字符串
-- `HOTSPOT_SMTP_CONFIG` - SMTP 配置文件路径
+- `NEWS_SKILL_DIR` - Skill 根目录（自动检测，通常无需设置）
+- `NEWS_SMTP_JSON` - SMTP 配置 JSON 字符串
+- `NEWS_SMTP_CONFIG` - SMTP 配置文件路径
 - `CHROME_PATH` / `PLAYWRIGHT_PATH` - Chrome/Playwright 路径（跨平台需要时设置）
 
 **发送成功后**：
@@ -55,7 +55,7 @@ exec:
 
 ## 工作流程
 
-### 1. 确定热点主题
+### 1. 确定主题
 
 **从用户输入中提取**：
 - **主题名称**：简报的核心主题（如：俄乌冲突、美联储利率决议、ChatGPT新功能等）
@@ -184,7 +184,7 @@ kimi_search:
 ```
 exec:
 {
-  "command": "python3 scripts/convert_and_send.py /tmp/hotspot_briefing.html <目标邮箱> '<主题>简报 | MM-DD HH:MM'"
+  "command": "python3 scripts/convert_and_send.py /tmp/news_briefing.html <目标邮箱> '<主题>简报 | MM-DD HH:MM'"
 }
 ```
 
@@ -193,7 +193,7 @@ exec:
 - 发送邮件：`python3 scripts/send_email.py --to <recipient> --subject <subject> --attachments <pdf>`
 
 **环境变量配置**（跨平台/非标准环境时使用）：
-- `HOTSPOT_SKILL_DIR` - Skill 根目录
+- `NEWS_SKILL_DIR` - Skill 根目录
 - `NODE_PATH` - Node.js 可执行文件路径
 - `CHROME_PATH` - Chrome/Chromium 可执行文件路径
 - `PLAYWRIGHT_PATH` - Playwright 模块路径
@@ -286,13 +286,13 @@ kimi_search:
 - **影响分析**：军事态势、能源市场、全球经济、人道危机
 
 #### 步骤4：生成HTML报告
-填充模板，保存到 `/tmp/hotspot_briefing.html`
+填充模板，保存到 `/tmp/news_briefing.html`
 
 #### 步骤5：转换为PDF并发送邮件
 ```
 exec:
 {
-  "command": "python3 scripts/convert_and_send.py /tmp/hotspot_briefing.html xxx@example.com '俄乌冲突简报 | 03-11 15:30'"
+  "command": "python3 scripts/convert_and_send.py /tmp/news_briefing.html xxx@example.com '俄乌冲突简报 | 03-11 15:30'"
 }
 ```
 

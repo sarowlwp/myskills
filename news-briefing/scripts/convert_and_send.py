@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-PDF转换与邮件发送合并脚本 - 热点简报
+PDF转换与邮件发送合并脚本 - 新闻简报
 接收HTML文件，转换为PDF并发送邮件
 支持通过环境变量或自动检测定位相关脚本
 """
@@ -13,12 +13,12 @@ from pathlib import Path
 def get_skill_dir():
     """
     自动检测 skill 目录，优先级：
-    1. 环境变量 HOTSPOT_SKILL_DIR
+    1. 环境变量 NEWS_SKILL_DIR
     2. 根据本脚本位置推断
     3. 常见路径尝试
     """
     # 优先级1：环境变量
-    env_dir = os.environ.get('HOTSPOT_SKILL_DIR')
+    env_dir = os.environ.get('NEWS_SKILL_DIR')
     if env_dir:
         return Path(env_dir)
 
@@ -30,18 +30,18 @@ def get_skill_dir():
 
     # 优先级3：尝试常见路径
     try_paths = [
-        Path.home() / ".openclaw" / "workspace" / "skills" / "hotspot-briefing",
-        Path.home() / ".claude" / "skills" / "hotspot-briefing",
-        Path("/usr/local/share/hotspot-briefing"),
-        Path("/opt/hotspot-briefing"),
+        Path.home() / ".openclaw" / "workspace" / "skills" / "news-briefing",
+        Path.home() / ".claude" / "skills" / "news-briefing",
+        Path("/usr/local/share/news-briefing"),
+        Path("/opt/news-briefing"),
     ]
     for try_path in try_paths:
         if (try_path / "assets" / "template.html").exists():
             return try_path
 
     raise RuntimeError(
-        "无法定位 hotspot-briefing skill 目录。\n"
-        "请设置 HOTSPOT_SKILL_DIR 环境变量，或确保脚本位于 skill/scripts/ 目录下。"
+        "无法定位 news-briefing skill 目录。\n"
+        "请设置 NEWS_SKILL_DIR 环境变量，或确保脚本位于 skill/scripts/ 目录下。"
     )
 
 
@@ -169,14 +169,14 @@ def convert_and_send(html_path, recipient, subject, body="简报PDF已生成，�
 def main():
     if len(sys.argv) < 4:
         print("用法: python3 convert_and_send.py <html文件> <收件人邮箱> <邮件主题> [邮件正文]")
-        print("示例: python3 convert_and_send.py /tmp/hotspot_briefing.html user@example.com '热点简报 | 03-11 15:30'")
+        print("示例: python3 convert_and_send.py /tmp/news_briefing.html user@example.com '新闻简报 | 03-11 15:30'")
         print("")
         print("环境变量:")
-        print("  HOTSPOT_SKILL_DIR    - Skill 根目录（可选，默认自动检测）")
+        print("  NEWS_SKILL_DIR    - Skill 根目录（可选，默认自动检测）")
         print("  NODE_PATH            - Node.js 可执行文件路径（可选）")
         print("  PYTHON_PATH          - Python 可执行文件路径（可选）")
-        print("  HOTSPOT_SMTP_JSON    - SMTP 配置 JSON 字符串（可选）")
-        print("  HOTSPOT_SMTP_CONFIG  - SMTP 配置文件路径（可选）")
+        print("  NEWS_SMTP_JSON    - SMTP 配置 JSON 字符串（可选）")
+        print("  NEWS_SMTP_CONFIG  - SMTP 配置文件路径（可选）")
         sys.exit(1)
 
     html_path = sys.argv[1]
@@ -185,7 +185,7 @@ def main():
     body = sys.argv[4] if len(sys.argv) > 4 else "简报PDF已生成，请查看附件。"
 
     print("=" * 50)
-    print("PDF转换与邮件发送 - 热点简报")
+    print("PDF转换与邮件发送 - 新闻简报")
     print("=" * 50)
 
     try:
